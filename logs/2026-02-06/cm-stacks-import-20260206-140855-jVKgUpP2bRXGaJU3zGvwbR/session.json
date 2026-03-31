@@ -1,0 +1,17 @@
+{
+  "command": "cm:stacks:import",
+  "module": "import",
+  "userId": "fde08eeb-cc85-438d-b70a-41f4240ab38e",
+  "email": "keerthika_srinivasan@epam.com",
+  "sessionId": "jVKgUpP2bRXGaJU3zGvwbR",
+  "apiKey": "blt3b046e66146fad38",
+  "orgId": "",
+  "authenticationMethod": "Basic Auth",
+  "startTimestamp": "2026-02-06T08:38:55.032Z",
+  "MachineEnvironment": {
+    "nodeVersion": "v24.13.0",
+    "os": "win32",
+    "hostname": "EPINCHEW0070",
+    "CLI_VERSION": "1.57.0"
+  }
+}

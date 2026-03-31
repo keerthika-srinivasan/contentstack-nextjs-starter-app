@@ -1,0 +1,4 @@
+{"level":"info","message":"Branch validation successful: bloga","timestamp":"2026-02-06T08:26:35.067Z"}
+{"module":"","level":"info","message":"Copying content to the backup directory...","timestamp":"2026-02-06T08:26:35.069Z"}
+{"level":"info","message":"The log has been stored at 'C:\\NewCSCMS\\contentstack-nextjs-starter-app\\logs'","timestamp":"2026-02-06T08:26:35.080Z"}
+{"level":"info","message":"No backup directory was created due to early termination","timestamp":"2026-02-06T08:26:35.081Z"}

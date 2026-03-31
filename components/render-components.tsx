@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import Section from './section';
-import HeroBanner from './hero-banner';
-import BlogBanner from './blog-banner';
-import CardSection from './card-section';
-import TeamSection from './team-section';
-import BlogSection from './blog-section';
-import SectionBucket from './section-bucket';
-import AboutSectionBucket from './about-section-bucket';
-import SectionWithHtmlCode from './section-with-html-code';
+import Section from "./section";
+import HeroBanner from "./hero-banner";
+import BlogBanner from "./blog-banner";
+import CardSection from "./card-section";
+import TeamSection from "./team-section";
+import BlogSection from "./blog-section";
+import SectionBucket from "./section-bucket";
+import ArticleSection from "./from-section";
+import AboutSectionBucket from "./about-section-bucket";
+import SectionWithHtmlCode from "./section-with-html-code";
 import { RenderProps } from "../typescript/component";
 
 export default function RenderComponents(props: RenderProps) {
@@ -20,6 +21,11 @@ export default function RenderComponents(props: RenderProps) {
       data-locale={locale}
     >
       {pageComponents?.map((component, key: number) => {
+        if (component.article) {
+          return (
+            <ArticleSection key={`component-${key}`} section={component.article} />
+          );
+        }
         if (component.hero_banner) {
           return blogPost ? (
             <BlogBanner

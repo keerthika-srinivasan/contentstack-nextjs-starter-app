@@ -1,0 +1,55 @@
+{"level":"info","message":"Branch validation successful: bloga","timestamp":"2026-02-06T09:50:28.266Z"}
+{"module":"","level":"info","message":"Copying content to the backup directory...","timestamp":"2026-02-06T09:50:28.269Z"}
+{"module":"","level":"info","message":"Starting audit process","timestamp":"2026-02-06T09:50:43.498Z"}
+{"module":"audit","level":"info","message":"Starting audit command: cm:stacks:audit:fix","timestamp":"2026-02-06T09:50:43.727Z"}
+{"module":"assets","level":"success","message":"Assets audit completed. Found 0 issues","timestamp":"2026-02-06T09:50:43.745Z"}
+{"module":"audit","level":"info","message":"Retrieved 0 content types and 0 global fields","timestamp":"2026-02-06T09:50:43.729Z"}
+{"module":"assets","level":"info","message":"Starting audit for module: assets","timestamp":"2026-02-06T09:50:43.735Z"}
+{"module":"extensions","level":"success","message":"Extensions audit completed. Found 0 issues","timestamp":"2026-02-06T09:50:43.753Z"}
+{"module":"assets","level":"info","message":"Executing assets audit","timestamp":"2026-02-06T09:50:43.738Z"}
+{"module":"audit","level":"info","message":"Creating entry metadata...","timestamp":"2026-02-06T09:50:43.741Z"}
+{"module":"assets","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.743Z"}
+{"module":"extensions","level":"info","message":"Starting audit for module: extensions","timestamp":"2026-02-06T09:50:43.746Z"}
+{"module":"extensions","level":"info","message":"Executing extensions audit","timestamp":"2026-02-06T09:50:43.747Z"}
+{"module":"global-fields","level":"success","message":"Global-fields audit completed. Found 0 issues","timestamp":"2026-02-06T09:50:43.760Z"}
+{"module":"extensions","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.752Z"}
+{"module":"global-fields","level":"info","message":"Starting audit for module: global-fields","timestamp":"2026-02-06T09:50:43.754Z"}
+{"module":"content-types","level":"success","message":"Content-types audit completed. Found 0 issues","timestamp":"2026-02-06T09:50:43.767Z"}
+{"module":"global-fields","level":"info","message":"Executing global-fields audit","timestamp":"2026-02-06T09:50:43.756Z"}
+{"module":"custom-roles","level":"success","message":"Custom-roles audit completed. Found 0 issues","timestamp":"2026-02-06T09:50:43.772Z"}
+{"module":"global-fields","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.760Z"}
+{"module":"workflows","level":"success","message":"Workflows audit completed. Found 0 issues","timestamp":"2026-02-06T09:50:43.776Z"}
+{"module":"content-types","level":"info","message":"Starting audit for module: content-types","timestamp":"2026-02-06T09:50:43.762Z"}
+{"module":"entries","level":"success","message":"Entries audit completed. Found 0 reference issues","timestamp":"2026-02-06T09:50:43.787Z"}
+{"module":"content-types","level":"info","message":"Executing content-types audit","timestamp":"2026-02-06T09:50:43.764Z"}
+{"module":"field-rules","level":"success","message":"Field-rules audit completed. Found 0 issues","timestamp":"2026-02-06T09:50:43.792Z"}
+{"module":"content-types","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.767Z"}
+{"module":"custom-roles","level":"info","message":"Starting audit for module: custom-roles","timestamp":"2026-02-06T09:50:43.768Z"}
+{"module":"custom-roles","level":"info","message":"Executing custom-roles audit","timestamp":"2026-02-06T09:50:43.769Z"}
+{"module":"custom-roles","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.771Z"}
+{"module":"workflows","level":"info","message":"Starting audit for module: workflows","timestamp":"2026-02-06T09:50:43.772Z"}
+{"module":"workflows","level":"info","message":"Executing workflows audit","timestamp":"2026-02-06T09:50:43.773Z"}
+{"module":"workflows","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.775Z"}
+{"module":"entries","level":"info","message":"Starting audit for module: entries","timestamp":"2026-02-06T09:50:43.777Z"}
+{"module":"entries","level":"info","message":"Executing entries audit","timestamp":"2026-02-06T09:50:43.778Z"}
+{"module":"entries","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.783Z"}
+{"module":"entries","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.783Z"}
+{"module":"entries","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.784Z"}
+{"module":"entries","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.785Z"}
+{"module":"entries","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.785Z"}
+{"module":"entries","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.786Z"}
+{"module":"field-rules","level":"info","message":"Starting audit for module: field-rules","timestamp":"2026-02-06T09:50:43.787Z"}
+{"module":"field-rules","level":"info","message":"Executing field-rules audit","timestamp":"2026-02-06T09:50:43.788Z"}
+{"module":"field-rules","level":"info","message":"Missing references count: 0","timestamp":"2026-02-06T09:50:43.791Z"}
+{"module":"field-rules","level":"info","message":"Missing references count: 8","timestamp":"2026-02-06T09:50:43.793Z"}
+{"module":"field-rules","level":"info","message":"No missing references found.","timestamp":"2026-02-06T09:50:43.808Z"}
+{"module":"","level":"info","message":"Audit process completed","timestamp":"2026-02-06T09:50:43.810Z"}
+{"module":"","level":"info","message":"Starting to import content version 1","timestamp":"2026-02-06T09:50:44.692Z"}
+{"module":"","level":"info","message":"Starting import of locales module","timestamp":"2026-02-06T09:50:44.693Z"}
+{"module":"","level":"info","message":"Starting import of environments module","timestamp":"2026-02-06T09:50:44.711Z"}
+{"module":"","level":"info","message":"Starting import of stack module","timestamp":"2026-02-06T09:50:44.720Z"}
+{"module":"","level":"info","message":"Starting import of assets module","timestamp":"2026-02-06T09:50:44.721Z"}
+{"module":"","level":"info","message":"Starting import of taxonomies module","timestamp":"2026-02-06T09:50:44.732Z"}
+{"module":"","level":"info","message":"Starting import of composable-studio module","timestamp":"2026-02-06T09:50:44.733Z"}
+{"level":"info","message":"The log has been stored at 'C:\\NewCSCMS\\contentstack-nextjs-starter-app\\logs'","timestamp":"2026-02-06T09:50:44.750Z"}
+{"level":"info","message":"The backup content has been stored at: C:\\NewCSCMS\\_backup_187","timestamp":"2026-02-06T09:50:44.751Z"}

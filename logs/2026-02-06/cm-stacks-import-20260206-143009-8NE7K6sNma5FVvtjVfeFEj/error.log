@@ -1,0 +1,2 @@
+{"level":"error","message":"Failed to resolve import path: Error: Content directory does not exist: C:\\clidata","timestamp":"2026-02-06T09:00:11.164Z"}
+{"level":"error","message":"ENOENT","meta":{"type":"APPLICATION_ERROR","error":{"name":"Error","message":"ENOENT","code":"ENOENT","stack":"Error: ENOENT: no such file or directory, lstat 'C:\\clidata'"}},"timestamp":"2026-02-06T09:00:11.830Z"}

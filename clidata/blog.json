@@ -1,0 +1,21 @@
+{
+  "content_type": {
+    "display_name": "Blog",
+    "uid": "blog",
+    "schema": [
+      {
+        "display_name": "Title",
+        "uid": "title",
+        "data_type": "text",
+        "mandatory": true,
+        "unique": true
+      },
+      {
+        "display_name": "URL",
+        "uid": "url",
+        "data_type": "text",
+        "mandatory": true
+      }
+    ]
+  }
+}

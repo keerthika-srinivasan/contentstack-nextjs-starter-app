@@ -1,0 +1,7 @@
+{"module":"audit","level":"warn","message":"Skipping extensions audit","timestamp":"2026-02-06T09:50:43.751Z"}
+{"module":"audit","level":"warn","message":"Skipping global-fields audit","timestamp":"2026-02-06T09:50:43.759Z"}
+{"module":"audit","level":"warn","message":"Skipping content-types audit","timestamp":"2026-02-06T09:50:43.766Z"}
+{"module":"audit","level":"warn","message":"Skipping custom-roles audit","timestamp":"2026-02-06T09:50:43.770Z"}
+{"level":"warn","message":"Skipping workflows audit","timestamp":"2026-02-06T09:50:43.775Z"}
+{"module":"audit","level":"warn","message":"Skipping entries audit","timestamp":"2026-02-06T09:50:43.781Z"}
+{"module":"audit","level":"warn","message":"Skipping content-types audit","timestamp":"2026-02-06T09:50:43.790Z"}

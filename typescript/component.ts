@@ -1,3 +1,4 @@
+import FromSection, { ArticleProps } from "../components/from-section";
 import { Action, Image } from "./action";
 
 type AdditionalParam = {
@@ -72,6 +73,7 @@ export type Component = {
   section_with_html_code?: AdditionalParamProps;
   our_team?: TeamProps;
   widget?: Widget;
+  article?: ArticleProps;
 }
 
 export type SectionWithBucket = {

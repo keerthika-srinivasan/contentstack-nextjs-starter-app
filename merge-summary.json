@@ -1,0 +1,7 @@
+{
+  "requestPayload": {
+    "base_branch": "main",
+    "compare_branch": "bloga",
+    "default_merge_strategy": "merge_prefer_base"
+  }
+}

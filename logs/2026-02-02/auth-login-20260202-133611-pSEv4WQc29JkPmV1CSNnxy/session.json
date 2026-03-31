@@ -1,0 +1,17 @@
+{
+  "command": "auth:login",
+  "module": "login",
+  "userId": "fde08eeb-cc85-438d-b70a-41f4240ab38e",
+  "email": "",
+  "sessionId": "pSEv4WQc29JkPmV1CSNnxy",
+  "apiKey": "",
+  "orgId": "",
+  "authenticationMethod": "",
+  "startTimestamp": "2026-02-02T08:06:11.412Z",
+  "MachineEnvironment": {
+    "nodeVersion": "v24.13.0",
+    "os": "win32",
+    "hostname": "EPINCHEW0070",
+    "CLI_VERSION": "1.56.0"
+  }
+}

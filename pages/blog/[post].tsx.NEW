@@ -1,0 +1,206 @@
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+import parse from 'html-react-parser';
+import { getPageByUrl } from '../../lib/services/pageService';
+import { getBlogPostByUrl } from '../../lib/services/blogService';
+import { onEntryChange } from '../../contentstack-sdk';
+import Skeleton from 'react-loading-skeleton';
+import RenderComponents from '../../components/render-components';
+import ArchiveRelative from '../../components/archive-relative';
+import { Page, BlogPosts, PageUrl } from "../../typescript/pages";
+
+/**
+ * PRESENTATION LAYER - Blog Post Component
+ *
+ * Responsibility:
+ * - Receive blog post and page data from API
+ * - Handle live preview updates
+ * - Render blog post UI only
+ */
+
+export default function BlogPost({
+  blogPost,
+  page,
+  pageUrl,
+}: {
+  blogPost: BlogPosts;
+  page: Page;
+  pageUrl: PageUrl;
+}) {
+  const [getPost, setPost] = useState({ banner: page, post: blogPost });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  /**
+   * Fetches updated blog post and banner data from API layer
+   * Called on live preview changes
+   */
+  async function fetchData() {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // Fetch blog post from API
+      const postResponse = await fetch(
+        `/api/blog?url=${encodeURIComponent(pageUrl)}`
+      );
+
+      if (!postResponse.ok) {
+        throw new Error(`Failed to fetch blog post: ${postResponse.statusText}`);
+      }
+
+      const postResult = await postResponse.json();
+
+      // Fetch banner (blog page) from API
+      const bannerResponse = await fetch(`/api/pages?url=/blog`);
+
+      if (!bannerResponse.ok) {
+        throw new Error(`Failed to fetch banner: ${bannerResponse.statusText}`);
+      }
+
+      const bannerResult = await bannerResponse.json();
+
+      if (!postResult.success || !postResult.data) {
+        throw new Error('Invalid post response format');
+      }
+
+      if (!bannerResult.success || !bannerResult.data) {
+        throw new Error('Invalid banner response format');
+      }
+
+      setPost({
+        banner: bannerResult.data,
+        post: postResult.data,
+      });
+    } catch (error) {
+      console.error('Error fetching blog data:', error);
+      setError(error instanceof Error ? error.message : 'Failed to load blog post');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // Subscribe to live preview changes
+  useEffect(() => {
+    onEntryChange(() => fetchData());
+  }, [blogPost]);
+
+  const { post, banner } = getPost;
+
+  // Render error state
+  if (error) {
+    return (
+      <div className="error-container">
+        <p>Failed to load blog post: {error}</p>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {/* Banner Section */}
+      {banner ? (
+        <RenderComponents
+          pageComponents={banner.page_components}
+          blogPost
+          contentTypeUid='blog_post'
+          entryUid={banner?.uid}
+          locale={banner?.locale}
+        />
+      ) : (
+        <Skeleton height={400} />
+      )}
+
+      {/* Blog Content */}
+      <div className='blog-container'>
+        <article className='blog-detail'>
+          {/* Title */}
+          {isLoading ? (
+            <h2><Skeleton /></h2>
+          ) : post && post.title ? (
+            <h2 {...post.$?.title as {}}>{post.title}</h2>
+          ) : (
+            <h2><Skeleton /></h2>
+          )}
+
+          {/* Date and Author */}
+          {isLoading ? (
+            <p><Skeleton width={300} /></p>
+          ) : post && post.date ? (
+            <p {...post.$?.date as {}}>
+              {moment(post.date).format('ddd, MMM D YYYY')},{' '}
+              <strong {...post.author[0].$?.title as {}}>
+                {post.author[0].title}
+              </strong>
+            </p>
+          ) : (
+            <p><Skeleton width={300} /></p>
+          )}
+
+          {/* Body Content */}
+          {isLoading ? (
+            <Skeleton height={800} width={600} />
+          ) : post && post.body ? (
+            <div {...post.$?.body as {}}>{parse(post.body)}</div>
+          ) : (
+            <Skeleton height={800} width={600} />
+          )}
+        </article>
+
+        {/* Sidebar - Related Posts */}
+        <div className='blog-column-right'>
+          <div className='related-post'>
+            {banner && banner?.page_components[2].widget ? (
+              <h2 {...banner?.page_components[2].widget.$?.title_h2 as {}}>
+                {banner?.page_components[2].widget.title_h2}
+              </h2>
+            ) : (
+              <h2><Skeleton /></h2>
+            )}
+            {post && post.related_post ? (
+              <ArchiveRelative
+                {...post.$?.related_post}
+                blogs={post.related_post}
+              />
+            ) : (
+              <Skeleton width={300} height={500} />
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/**
+ * SERVER-SIDE RENDERING
+ * Calls service layer to fetch initial data
+ * This data is passed as props to the component
+ */
+export async function getServerSideProps({ params }: any) {
+  try {
+    // Build URLs
+    const postUrl = `/blog/${params.post}`;
+
+    // Fetch data from service layer (not API)
+    // This ensures SSR data load is fast (server-to-server, no HTTP)
+    const page = await getPageByUrl('/blog');
+    const post = await getBlogPostByUrl(postUrl);
+
+    if (!page || !post) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        pageUrl: postUrl,
+        blogPost: post,
+        page,
+      },
+      revalidate: 60, // ISR: Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error in getServerSideProps:', error);
+    return { notFound: true };
+  }
+}

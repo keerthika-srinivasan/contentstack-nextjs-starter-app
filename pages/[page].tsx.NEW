@@ -1,0 +1,115 @@
+import React, { useState, useEffect } from 'react';
+import { onEntryChange } from '../contentstack-sdk';
+import RenderComponents from '../components/render-components';
+import Skeleton from 'react-loading-skeleton';
+import { Props } from "../typescript/pages";
+import { getPageByUrl } from '../lib/services/pageService';
+
+/**
+ * PRESENTATION LAYER - Page Component
+ *
+ * Responsibility:
+ * - Receive page data from API
+ * - Handle live preview updates
+ * - Render UI components only
+ */
+
+export default function Page(props: Props) {
+  const { page, entryUrl } = props;
+  const [getEntry, setEntry] = useState(page);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  /**
+   * Fetches updated page data from API layer
+   * Called on live preview changes
+   */
+  async function fetchData() {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // Call API endpoint instead of directly calling service
+      const response = await fetch(`/api/pages?url=${encodeURIComponent(entryUrl)}`);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch page: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+
+      if (!result.success || !result.data) {
+        throw new Error('Invalid response format');
+      }
+
+      setEntry(result.data);
+    } catch (error) {
+      console.error('Error fetching page data:', error);
+      setError(error instanceof Error ? error.message : 'Failed to load page');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // Subscribe to live preview changes
+  useEffect(() => {
+    onEntryChange(() => fetchData());
+  }, []);
+
+  // Render loading state
+  if (isLoading) {
+    return <Skeleton count={3} height={300} />;
+  }
+
+  // Render error state
+  if (error) {
+    return (
+      <div className="error-container">
+        <p>Failed to load page: {error}</p>
+      </div>
+    );
+  }
+
+  // Render page content
+  return getEntry && getEntry.page_components ? (
+    <RenderComponents
+      pageComponents={getEntry.page_components}
+      contentTypeUid='page'
+      entryUid={getEntry.uid}
+      locale={getEntry.locale}
+    />
+  ) : (
+    <Skeleton count={3} height={300} />
+  );
+}
+
+/**
+ * SERVER-SIDE RENDERING
+ * Calls service layer to fetch initial data
+ * This data is passed as props to the component
+ */
+export async function getServerSideProps({params}: any) {
+  try {
+    // Build page URL from params
+    const entryUrl = params.page.includes('/') ? params.page : `/${params.page}`;
+
+    // Call service layer directly on server
+    // This ensures data is loaded before HTML is sent to client
+    const entryRes = await getPageByUrl(entryUrl);
+
+    if (!entryRes) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        entryUrl: entryUrl,
+        page: entryRes,
+      },
+      revalidate: 60, // ISR: Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error in getServerSideProps:', error);
+    return { notFound: true };
+  }
+}
